@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "`Название занятия`" - `Фамилия и имя студента`
+# Домашнее задание к занятию "`Система мониторинга Zabbix`" - `Zheltov Ilya`
 
 
 ### Инструкция по выполнению домашнего задания
@@ -26,23 +26,40 @@
 
 `Приведите ответ в свободной форме........`
 
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
+1. `Обновляем КЭШ репозиториев и обновляем зависимости`
+2. `Устанавливаем posttgres`
+3. `Скачиваем репу`
+4. `Ставим репозитории и опять обновляем кэш репозиториев что бы появились репозитория zabbix`
+5. `Создаем юзера для БД и создаем саму БД`
+6. `Копируем задержимое в БД`
+7. `Прописываем юзера БД и пароль в настройках zabbix сервера` 
+8. `Рестартуем, включаем, проверяем что apache и zabbix server запустились`
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+sudo apt update
+sudo apt upgrade
+sudo apt install postgresql postgresql-contrib
+
+wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-4+debian11_all.deb
+dpkg -i zabbix-release_6.0-4+debian11_all.deb
+apt update
+su - postgres -c 'psql --command "CREATE USER zabbix WITH PASSWORD '\'123456789\'';"' 
+
+su - postgres -c 'psql --command "CREATE DATABASE zabbix OWNER zabbix;"' 
+
+zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
+sed -i 's/# DBPassword=/DBPassword=123456789/g' /etc/zabbix/zabbix_server.conf 
+
+systemctl restart zabbix-server  apache2
+
+systemctl enable zabbix-server apache2
+
+systemctl status zabbix-server  apache2
+
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота 1](ссылка на скриншот 1)`
+При необходимости прикрепитe сюда скриншоты
+[Окно Авторизации](https://ru.paste.pics/1dda3d290162d2c82283ae29b459aa67)
 
 
 ---
@@ -51,23 +68,31 @@
 
 `Приведите ответ в свободной форме........`
 
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
+1. `Заходим на WEB -> Configuration->Hosts->Create hos`
+2. `Далее прописываем имя хоста, добавляем группы(может сделать свои), добавляем интерфейс и настраиваем подключение по IP или DNS(на ваш выбор если есть DNS у сервера)`
+3. `Добавляем и когда Status будет Enabled, а Availability гореть зеленом`
+4. `И конечно что бы все получилось нужно в самом агенте прописать IP(нашего сервреа) или повесть, к кому он может подключаться`
+5. `В данный момент я подключил два агента, один стоит на отдельной машине второй на самом сервере`
 6. 
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-4+debian11_all.deb
+
+dpkg -i zabbix-release_6.0-4+debian11_all.deb
+
+apt update apt install zabbix-agent
+
+systemctl restart zabbix-agent
+
+systemctl enable zabbix-agent
+
+systemctl status zabbix-agent
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота 2](ссылка на скриншот 2)`
+При необходимости прикрепитe сюда скриншоты
+[Скриншот что zabbix агенты подключены](https://ru.paste.pics/87ceb3b9b1ae787b746b2655d5e62b37)
+[Скриншот что все работает как нужно](https://ru.paste.pics/83d123bfb565c98f53fb191560e48473)
+[Скриншот Monitoring->Latest Data](https://ru.paste.pics/c5149a9fbf9e06c8d82f439b0e940ac1)
 
 
 ---
