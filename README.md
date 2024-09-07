@@ -487,12 +487,12 @@ systemctl status zabbix-agent
 
 ### Задание 1
 
-`Запустите два simple python сервера на своей виртуальной машине на разных портах`
-`Установите и настройте HAProxy, воспользуйтесь материалами к лекции по ссылке`
-`Настройте балансировку Round-robin на 4 уровне`
-`На проверку направьте конфигурационный файл haproxy, скриншоты, где видно перенаправление запросов на разные серверы при обращении к HAProxy.`
+Запустите два `simple python` сервера на своей виртуальной машине на разных портах
+Установите и настройте HAProxy, воспользуйтесь материалами к лекции по ссылке
+Настройте балансировку `Round-robin` на 4 уровне
+На проверку направьте конфигурационный файл haproxy, скриншоты, где видно перенаправление запросов на разные серверы при обращении к `HAProxy`.
 
-1. `Запускаю ВМ и создаю две директории`
+1. Запускаю ВМ и создаю две директории
  ```bash
 mkdir http1
 ``` 
@@ -500,20 +500,20 @@ mkdir http1
 mkdir http2
 ``` 
 
-2. `Установил haproxy`
+2. Установил haproxy
  ```bash 
 sudo apt-get install haproxy
 ```
 
-3. `Установил haproxy`
- `Запустил два python-сервера с разными портами. Один с портом 8888`
- ![Запуска сервер 1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr1.png)`
+3. Установил haproxy
+ Запустил два python-сервера с разными портами. Один с портом 8888
+ ![Запуска сервер 1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr1.png)
 
- `Запустил два python-сервера с разными портами. Один с портом 9999`
- ![Запуск сервера 2](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr2.png)`
+ Запустил два python-сервера с разными портами. Один с портом 9999
+ ![Запуск сервера 2](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr2.png)
 
 
-4. '4. Из материалов к лекции выполнил настройку конфигурационного файла для балансировки на L4'
+4. Из материалов к лекции выполнил настройку конфигурационного файла для балансировки на L4
 ```bash
 global
         log /dev/log    local0
@@ -580,20 +580,20 @@ listen web_tcp
 
 ```
 
-5. 'Проверил в браузере страницу со статистикой .'
+5. Проверил в браузере страницу со статистикой .
 
-![Стата](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/stat.png)`
+![Стата](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/stat.png)
 
 ### Задание 2
 
-`Запустите три simple python сервера на своей виртуальной машине на разных портах`
-`Настройте балансировку Weighted Round Robin на 7 уровне, чтобы первый сервер имел вес 2, второй - 3, а третий - 4`
-`HAproxy должен балансировать только тот http-трафик, который адресован домену example.local`
-`На проверку направьте конфигурационный файл haproxy, скриншоты, где видно перенаправление запросов на разные серверы при обращении к HAProxy c использованием домена example.local и без него.`
+Запустите три `simple python` сервера на своей виртуальной машине на разных портах
+Настройте балансировку `Weighted Round Robin` на 7 уровне, чтобы первый сервер имел вес 2, второй - 3, а третий - 4
+HAproxy должен балансировать только тот `http-трафик`, который адресован домену example.local
+На проверку направьте конфигурационный файл haproxy, скриншоты, где видно перенаправление запросов на разные серверы при обращении к HAProxy c использованием домена `example.local` и без него.
 
 
-1.`Я добавил 3-ю диркторию http3, в ней  создал файл index.html вот с такими данными Server 3 :6666 и запустил в ней Python-server`
-2. `Открываю  конфигурационный файл haproxy`
+1. Я добавил 3-ю диркторию `http3`, в ней  создал файл `index.html` вот с такими данными `Server 3 :6666` и запустил в ней Python-server
+2. Открываю  конфигурационный файл `haproxy`
 --
 ```bash
 sudo nano /etc/haproxy/haproxy.cfg
@@ -601,7 +601,7 @@ sudo nano /etc/haproxy/haproxy.cfg
 --
 и в пунктах `forntend` и `backend` изменил следующие настройки
 
-![Скрин изменений](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zdz.png)`
+![Скрин изменений](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zdz.png)
 --
 
 перезагружаем `HaProxy`
@@ -610,20 +610,20 @@ sudo nano /etc/haproxy/haproxy.cfg
 ```bash
 curl -H 'Host:example.local' http://127.0.0.1:8088
 ```
-![Чекаем по домену](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zapros.png)`
+![Чекаем по домену](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zapros.png)
 
 и получаю балансировку по весу серверов: 
 - 4 запроса на 888
 - 3 запроса на 666
 - 2 запроса на 999
 
-![Скрин запросов](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/final.png)`
+![Скрин запросов](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/final.png)
 --
 
 Если сделать запрос без указания хоста , то мы получим ошибку
 
-![Скрин](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/error.png)`
+![Скрин](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/error.png)
 --
 
 Файл конфигурации
-[Файл конфигурации](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/haproxy.cfg)`
+[Файл конфигурации](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/haproxy.cfg)
