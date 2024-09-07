@@ -507,10 +507,10 @@ sudo apt-get install haproxy
 
 3. `Установил haproxy`
  `Запустил два python-сервера с разными портами. Один с портом 8888`
- ![Запуска сервер 1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr1)`
+ ![Запуска сервер 1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr1.png)`
 
  `Запустил два python-сервера с разными портами. Один с портом 9999`
- ![Запуск сервера 2](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr2)`
+ ![Запуск сервера 2](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr2.png)`
 
 
 4. '4. Из материалов к лекции выполнил настройку конфигурационного файла для балансировки на L4'
@@ -582,7 +582,7 @@ listen web_tcp
 
 5. 'Проверил в браузере страницу со статистикой .'
 
-![Стата](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/stat)`
+![Стата](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/stat.png)`
 
 ### Задание 2
 
@@ -601,7 +601,7 @@ sudo nano /etc/haproxy/haproxy.cfg
 --
 и в пунктах `forntend` и `backend` изменил следующие настройки
 
-![Скрин изменений](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zdz)`
+![Скрин изменений](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zdz.png)`
 --
 
 перезагружаем `HaProxy`
@@ -610,19 +610,19 @@ sudo nano /etc/haproxy/haproxy.cfg
 ```bash
 curl -H 'Host:example.local' http://127.0.0.1:8088
 ```
-![Чекаем по домену](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zapros)`
+![Чекаем по домену](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zapros.png)`
 
 и получаю балансировку по весу серверов: 
 - 4 запроса на 888
 - 3 запроса на 666
 - 2 запроса на 999
 
-![Скрин запросов](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/final)`
+![Скрин запросов](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/final.png)`
 --
 
 Если сделать запрос без указания хоста , то мы получим ошибку
 
-![Скрин](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/error)`
+![Скрин](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/error.png)`
 --
 
 Файл конфигурации
