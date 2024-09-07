@@ -507,10 +507,10 @@ sudo apt-get install haproxy
 
 3. `Установил haproxy`
  `Запустил два python-сервера с разными портами. Один с портом 8888`
- ![8888](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr1)`
+ ![Запуска сервер 1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr1)`
 
  `Запустил два python-сервера с разными портами. Один с портом 9999`
- ![8888](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr2)`
+ ![Запуск сервера 2](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/sr2)`
 
 
 4. '4. Из материалов к лекции выполнил настройку конфигурационного файла для балансировки на L4'
@@ -582,7 +582,7 @@ listen web_tcp
 
 5. 'Проверил в браузере страницу со статистикой .'
 
-![8888](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/stat)`
+![Стата](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/stat)`
 
 ### Задание 2
 
@@ -601,7 +601,7 @@ sudo nano /etc/haproxy/haproxy.cfg
 --
 и в пунктах `forntend` и `backend` изменил следующие настройки
 
-![8888](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zdz)`
+![Скрин изменений](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zdz)`
 --
 
 перезагружаем `HaProxy`
@@ -610,20 +610,20 @@ sudo nano /etc/haproxy/haproxy.cfg
 ```bash
 curl -H 'Host:example.local' http://127.0.0.1:8088
 ```
-![8888](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zapros)`
+![Чекаем по домену](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zapros)`
 
 и получаю балансировку по весу серверов: 
 - 4 запроса на 888
 - 3 запроса на 666
 - 2 запроса на 999
 
-![8888](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/final)`
+![Скрин запросов](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/final)`
 --
 
 Если сделать запрос без указания хоста , то мы получим ошибку
 
-![8888](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/error)`
+![Скрин](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/error)`
 --
 
 Файл конфигурации
-[8888](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/haproxy.cfg)`
+[Файл конфигурации](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/haproxy.cfg)`
