@@ -653,7 +653,7 @@ curl -H 'Host:example.local' http://127.0.0.1:8088
 
 1. [Руководство по оформлению Markdown файлов](https://gist.github.com/Jekins/2bf2d0638163f1294637#Code)
 
----
+----
 
 ### Задание 1
 Составьте команду `rsync`, которая позволяет создавать зеркальную копию домашней директории пользователя в директорию `/tmp/backup`
@@ -662,7 +662,7 @@ curl -H 'Host:example.local' http://127.0.0.1:8088
 На проверку направить скриншот с командой и результатом ее выполнения
 
 1. Прилагаю скриншот своей команды 
---
+---
  ![Команда rsync](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/rsync.png)
 
 - `a` Архивный режим (сохраняет права, символьные ссылки и временные метки)
@@ -670,10 +670,10 @@ curl -H 'Host:example.local' http://127.0.0.1:8088
 - `progress` Наблюдаем за прогрессом выполнения
 - `exlude` Исключаем файлы которые не сенхронизируются
 - `delete` копирование в режиме заркалирования
---
+---
 ![Выполнение команды](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/rsync_done.png)
  Убрал `--progress` что бы наглядно показать
---
+---
 
 ### Задание 2
 
@@ -707,12 +707,12 @@ else
     exit 1
 fi
 ```
---
+---
 - Делае зеркалированное резервное копирование
 - Добавил задачу в cron для ежедневного выполнения
 - Добавил лог фаил который все это логирует
 - Копия складывается локально в `/tmp/backup_iszheltov`
---
+---
 ![Crontab -L](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/cron.png)
 
 Для проверки работы дерним скрипт вручную
@@ -732,8 +732,8 @@ fi
 `1 Мбит/с = 1024 Кбит/с = 1024 / 8 КБ/с ≈ 128 КБ/с`. Для точности и меньшего потребления возьмем 125 КБ/с
 
 ![bwlimit](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/bwlimite.png)
---
+---
 ![2-й сервер](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/server2.png)
---
+---
 Как мы видим скорость передачи была не выше 125.
 
