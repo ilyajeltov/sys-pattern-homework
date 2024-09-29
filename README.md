@@ -987,9 +987,9 @@ services:
 ```
 3. Далее запустил `docker-compose up -d`
 
-4. ![docker_run](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run.png)
+4. [docker_run](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run.png)
 
-5. ![curl_GET](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/curl_GET.png)
+5. [curl_GET](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/curl_GET.png)
 
 
 #### Задание 2
@@ -1012,9 +1012,9 @@ kibana:
 
 2. Далее запустил `docker-compose up -d`
 
-4. ![docker_run_kibana](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run_kibana.png)
+4. [docker_run_kibana](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run_kibana.png)
 
-5. ![http_kibana](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/http_kibana.png)
+5. [http_kibana](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/http_kibana.png)
 
 #### Задание 3
 
@@ -1046,11 +1046,11 @@ logstash:
 
 2. Далее запустил `docker-compose up -d`
 
-4. ![docker_run_kibana_log_nginx](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run_kibana_log_nginx.png)
+4. [docker_run_kibana_log_nginx](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run_kibana_log_nginx.png)
 
-5. ![inteface_kibana_nginx](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/inteface_kibana_nginx.png)
+5. [inteface_kibana_nginx](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/inteface_kibana_nginx.png)
 
-6. ![inte](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/inte.png)
+6. [inte](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/inte.png)
 
 #### Задание 4
 
@@ -1070,10 +1070,10 @@ filebeat:
 ```
 2. Далее запустил `docker-compose up -d`
 
-3. ![docker_run_kibana_log_nginx_filebeat](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run_kibana_log_nginx_filebeat.png)
+3. [docker_run_kibana_log_nginx_filebeat](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run_kibana_log_nginx_filebeat.png)
 
 4. [filebeat_log1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/filebeat_log1.png)
 
-5. (https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/filebeat_log2.png)
+5. [filebeat_log2] (https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/filebeat_log2.png)
 
-Так же прикладываю свой `yml` файл ![file_yaml](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/version3.yaml)
+Так же прикладываю свой `yml` файл [file_yaml](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/version3.yaml)
