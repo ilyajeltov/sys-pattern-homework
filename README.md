@@ -1074,6 +1074,6 @@ filebeat:
 
 4. [filebeat_log1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/filebeat_log1.png)
 
-5. [filebeat_log2] (https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/filebeat_log2.png)
+5. [filebeat_log2](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/filebeat_log2.png)
 
 Так же прикладываю свой `yml` файл [file_yaml](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/version3.yaml)
