@@ -941,3 +941,139 @@ docker exec -it redis-t redis-cli
 1. Тут будет просто скрин 
 
 ![incrybt_redis](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/incrybt_redis.png)
+
+# Домашнее задание к «ELK» - Zheltov Ilya
+
+1. Сделайте `fork` данного репозитория к себе в Github и переименуйте его по названию или номеру занятия, например, https://github.com/имя-вашего-репозитория/git-hw или  https://github.com/имя-вашего-репозитория/7-1-ansible-hw).
+   2. Выполните клонирование данного репозитория к себе на ПК с помощью команды `git clone`.
+   3. Выполните домашнее задание и заполните у себя локально этот файл README.md:
+      - впишите вверху название занятия и вашу фамилию и имя
+      - в каждом задании добавьте решение в требуемом виде (текст/код/скриншоты/ссылка)
+      - для корректного добавления скриншотов воспользуйтесь [инструкцией "Как вставить скриншот в шаблон с решением](https://github.com/netology-code/sys-pattern-homework/blob/main/screen-instruction.md)
+      - при оформлении используйте возможности языка разметки md (коротко об этом можно посмотреть в [инструкции  по MarkDown](https://github.com/netology-code/sys-pattern-homework/blob/main/md-instruction.md))
+   4. После завершения работы над домашним заданием сделайте коммит (`git commit -m "comment"`) и отправьте его на Github (`git push origin`);
+   5. Для проверки домашнего задания преподавателем в личном кабинете прикрепите и отправьте ссылку на решение в виде md-файла в вашем Github.
+   6. Любые вопросы по выполнению заданий спрашивайте в чате учебной группы и/или в разделе “Вопросы по заданию” в личном кабинете.
+   
+Желаем успехов в выполнении домашнего задания!
+
+#### Задание 1
+Установите и запустите Elasticsearch, после чего поменяйте параметр cluster_name на случайный.
+Приведите скриншот команды 'curl -X GET 'localhost:9200/_cluster/health?pretty', сделанной на сервере с установленным Elasticsearch. Где будет виден нестандартный cluster_name.
+
+#### Ответ
+
+1. Я установил docker compose
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/2.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+2. Начал писать `docker-compose.yml` и первым делом добавил туда установку `Elasticsearch`
+```bash
+version: '3.8'
+
+services:
+  elasticsearch:
+    image: elasticsearch:8.12.2
+    environment:
+      - discovery.type=single-node
+      - cluster.name=iszheltov
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+```
+3. Далее запустил `docker-compose up -d`
+
+4. ![docker_run](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run.png)
+
+5. ![curl_GET](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/curl_GET.png)
+
+
+#### Задание 2
+Установите и запустите Kibana.
+Приведите скриншот интерфейса Kibana на странице http://<ip вашего сервера>:5601/app/dev_tools#/console, где будет выполнен запрос GET /_cluster/health?pretty.
+
+#### Ответ
+
+1. Дополнил свой `docker-compose.yml` и добавил туда установку Kibana 
+```bash
+kibana:
+    image: kibana:8.12.2
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200 
+```
+
+2. Далее запустил `docker-compose up -d`
+
+4. ![docker_run_kibana](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run_kibana.png)
+
+5. ![http_kibana](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/http_kibana.png)
+
+#### Задание 3
+
+Установите и запустите Logstash и Nginx. С помощью Logstash отправьте access-лог Nginx в Elasticsearch.
+Приведите скриншот интерфейса Kibana, на котором видны логи Nginx.
+
+#### Ответ
+
+1. Дополнил свой `docker-compose.yml` и добавил туда установку Logstah и Nginx.
+```bash
+logstash:
+    image: logstash:8.12.2
+    environment:
+      - ELASTICSEARCH_HOST=elasticsearch
+    volumes:
+      - ./logs:/var/log/nginx
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - "5044:5044"
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./logs:/var/log/nginx
+    ports:
+      - "80:80"                  
+```
+
+2. Далее запустил `docker-compose up -d`
+
+4. ![docker_run_kibana_log_nginx](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run_kibana_log_nginx.png)
+
+5. ![inteface_kibana_nginx](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/inteface_kibana_nginx.png)
+
+6. ![inte](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/inte.png)
+
+#### Задание 4
+
+Установите и запустите Filebeat. Переключите поставку логов Nginx с Logstash на Filebeat.
+Приведите скриншот интерфейса Kibana, на котором видны логи Nginx, которые были отправлены через Filebeat.
+
+1. Дополнил свой `docker-compose.yml` и добавил туда установку filebeat.
+```bash
+filebeat:
+    image: elastic/filebeat:8.12.2
+    volumes:
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./logs:/var/log/nginx
+    depends_on:
+      - elasticsearch
+    command: filebeat -e -strict.perms=false
+```
+2. Далее запустил `docker-compose up -d`
+
+3. ![docker_run_kibana_log_nginx_filebeat](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/docker_run_kibana_log_nginx_filebeat.png)
+
+4. ![filebeat_log1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/inteface_kibana_nginx.png)
+
+5. ![filebeat_log2](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/inte.png)
+
+Так же прикладываю свой `yml` файл ![file_yaml](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/version3.yaml)
