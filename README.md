@@ -1148,7 +1148,7 @@ $ rabbitmqadmin get queue='hello'
 [cl](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/cl.png)
 
 Видно что установлена политика
-[cl1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/cl1.png)
+[cl1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/cl2.png)
 
 Вывод команды `rabbitmqctl cluster_status`rmq1
 [rmq1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/rmq1.png)
@@ -1162,7 +1162,7 @@ $ rabbitmqadmin get queue='hello'
 Вывод команды `$ rabbitmqadmin get queue='hello'` на rmq2
 [get2](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/get2.png)
 
-[fin2](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/fin2.png)
+[fin](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/fin.png)
 
 # Домашнее задание к «Базы данных» - Zheltov Ilya
 
