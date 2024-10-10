@@ -1107,8 +1107,10 @@ $ pip install pika
 В качестве решения домашнего задания приложите оба скриншота, сделанных на этапе выполнения.
 Для закрепления материала можете попробовать модифицировать скрипты, чтобы поменять название очереди и отправляемое сообщение.
 
-#### Ответ
+### Ответ
+
 [zr1](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zr1.png)
+
 Так же мы видм запуск самого скрипта
 [zr2](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/zr2.png)
 
@@ -1131,13 +1133,17 @@ $ rabbitmqadmin get queue='hello'
 
 #### Ответ
 Политику создаем командой:
+
 `rabbitmqctl set_policy ha-all ""  '{"ha-mode":"all","ha-sync-mode":"automatic"}'`
+
 Так же не забываем проверять что `cat /var/lib/rabbitmq/.erlang.cookie` одинаковые на каждой машине
+
 В кластер объединяем командами:
 `rabbitmqctl stop_app`
 `rabbitmqctl join_cluster {ip_addr or dns name another rbmq server}`
 `rabbitmqctl start_app`
 `rabbitmqctl cluster_status`
+
 Скришот где видно что в кластере 2 ноды
 [cl](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/cl.png)
 
@@ -1195,40 +1201,65 @@ $ rabbitmqadmin get queue='hello'
 Как то получилось так, очень пока тяжеловато с ходу правильно разбить.
 
 1. Сотрудники (Employees)
+
 идентификатор (primary key, serial) — уникальный идентификатор сотрудника.
+
 ФИО (full_name, varchar(100)) — фамилия, имя и отчество сотрудника.
+
 оклад (salary, numeric(10, 2)) — заработная плата сотрудника.
+
 должность (position, varchar(100)) — название должности сотрудника.
+
 идентификатор подразделения (department_id, integer) — внешний ключ на таблицу "Подразделения".
+
 дата найма (hire_date, date) — дата найма сотрудника.
+
 идентификатор проекта (project_id, integer) — внешний ключ на таблицу "Проекты".
 
 2. Подразделения (Departments)
+
 идентификатор (primary key, serial) — уникальный идентификатор подразделения.
+
 название подразделения (department_name, varchar(100)) — название подразделения.
+
 тип подразделения (department_type, varchar(50)) — тип подразделения (группа, отдел).
 
 3. Проекты (Projects)
+
 идентификатор (primary key, serial) — уникальный идентификатор проекта.
+
 название проекта (project_name, varchar(100)) — наименование проекта.
+
 описание проекта (project_description, text) — краткое описание проекта 
 
 4. Филиалы (Branches)
+
 идентификатор (primary key, serial) — уникальный идентификатор филиала.
+
 адрес филиала (branch_address, varchar(255)) — физический адрес филиала.
+
 город (city, varchar(100)) — город, в котором находится филиал.
+
 регион (region, varchar(100)) — регион, где расположен филиал.
 
 5. Должности (Positions)
+
 идентификатор (primary key, serial) — уникальный идентификатор должности.
+
 название должности (position_name, varchar(100)) — наименование должности (например, ведущий инженер).
+
 оклад (salary, numeric(10, 2)) — базовый оклад для должности.
 
 6. Типы подразделений (Department_Types)
+
 идентификатор (primary key, serial) — уникальный идентификатор типа подразделения.
+
 название типа (type_name, varchar(50)) — тип подразделения (например, "отдел", "группа").
 
 7. Назначения на проекты (Project_Assignments)
+
 идентификатор (primary key, serial) — уникальный идентификатор записи о назначении.
+
 идентификатор сотрудника (employee_id, integer) — внешний ключ на таблицу "Сотрудники".
+
 идентификатор проекта (project_id, integer) — внешний ключ на таблицу "Проекты".
