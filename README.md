@@ -1263,3 +1263,155 @@ $ rabbitmqadmin get queue='hello'
 идентификатор сотрудника (employee_id, integer) — внешний ключ на таблицу "Сотрудники".
 
 идентификатор проекта (project_id, integer) — внешний ключ на таблицу "Проекты".
+
+
+
+# Домашнее задание к «Работа с данными (DDL/DML)» - Zheltov Ilya
+
+1. Сделайте `fork` данного репозитория к себе в Github и переименуйте его по названию или номеру занятия, например, https://github.com/имя-вашего-репозитория/git-hw или  https://github.com/имя-вашего-репозитория/7-1-ansible-hw).
+   2. Выполните клонирование данного репозитория к себе на ПК с помощью команды `git clone`.
+   3. Выполните домашнее задание и заполните у себя локально этот файл README.md:
+      - впишите вверху название занятия и вашу фамилию и имя
+      - в каждом задании добавьте решение в требуемом виде (текст/код/скриншоты/ссылка)
+      - для корректного добавления скриншотов воспользуйтесь [инструкцией "Как вставить скриншот в шаблон с решением](https://github.com/netology-code/sys-pattern-homework/blob/main/screen-instruction.md)
+      - при оформлении используйте возможности языка разметки md (коротко об этом можно посмотреть в [инструкции  по MarkDown](https://github.com/netology-code/sys-pattern-homework/blob/main/md-instruction.md))
+   4. После завершения работы над домашним заданием сделайте коммит (`git commit -m "comment"`) и отправьте его на Github (`git push origin`);
+   5. Для проверки домашнего задания преподавателем в личном кабинете прикрепите и отправьте ссылку на решение в виде md-файла в вашем Github.
+   6. Любые вопросы по выполнению заданий спрашивайте в чате учебной группы и/или в разделе “Вопросы по заданию” в личном кабинете.
+   
+Желаем успехов в выполнении домашнего задания!
+
+#### Задание 1
+
+1.1. Поднимите чистый инстанс MySQL версии 8.0+. Можно использовать локальный сервер или контейнер Docker.
+
+1.2. Создайте учётную запись sys_temp.
+
+1.3. Выполните запрос на получение списка пользователей в базе данных. (скриншот)
+
+1.4. Дайте все права для пользователя sys_temp.
+
+1.5. Выполните запрос на получение списка прав для пользователя sys_temp. (скриншот)
+
+1.6. Переподключитесь к базе данных от имени sys_temp.
+
+Для смены типа аутентификации с sha2 используйте запрос:
+```bash
+ ALTER USER 'sys_test'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';                 
+```
+1.7. По ссылке https://downloads.mysql.com/docs/sakila-db.zip скачайте дамп базы данных.
+
+1.8. Восстановите дамп в базу данных.
+
+1.9. При работе в IDE сформируйте ER-диаграмму получившейся базы данных. При работе в командной строке используйте команду для получения всех таблиц базы данных. (скриншот)
+
+Результатом работы должны быть скриншоты обозначенных заданий, а также простыня со всеми запросами.
+
+### Ответ
+
+1.1. Устанавдивает MySql 8+ версии
+ 
+ Обновляем нашу систему `sudo apt update && sudo apt upgrade -y` 
+ Далее `wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb` можно и последнию версию но я остановился на этой.
+ Добавляем репозитории `sudo dpkg -i mysql-apt-config_0.8.22-1_all.deb`
+ Далее добавляем GPG ключи `wget -qO - https://repo.mysql.com/RPM-GPG-KEY-mysql-2023 | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mysql.gpg` 
+ Примечание: Для разной версии используются разные ключи просьба проверять.
+ Потом мы делаем `sudo apt update`
+ Установка `sudo apt install mysql-server`
+ Добавляем в автозагрузку `sudo systemctl enable mysql`
+ Установка завершена.
+
+1.2
+ Для создание учетной записи пользователя sys_temp использую команду
+```bash
+ CREATE USER 'sys_temp'@'localhost' IDENTIFIED BY 'PASSWORD';                 
+```
+1.3
+ Для получения списка пользователей используем команду
+```bash
+ SELECT User, Host FROM mysql.user;;                 
+```
+[select_user](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/select_user.png)
+
+1.4
+ Для выдачи всех прав для sys_temp используем команду
+```bash
+ GRANT ALL PRIVILEGES ON *.* TO 'sys_temp'@'localhost' WITH GRANT OPTION;                 
+```
+1.5 
+ Что бы выполнеть запрос на получение всех прав для пользователя sys_temp нужно сделать команду
+```bash
+SHOW GRANTS FOR 'sys_temp'@'localhost';                 
+```
+1.6
+ Перезаходим используя команду `mysql -u sys_temp -p`
+
+1.7
+ Скачал.
+
+1.8
+ Создаеи базу `sakila` с помощью команды `CREATE DATABASE sakila;`
+ Далее нам нужно восстановить структуру БД `mysql -u sys_temp -p sakila < /path/to/your/sakila-schema.sql`
+ После это восстановление данных из файла `mysql -u root -p sakila < /path/to/your/sakila-data.sql`
+
+1.9
+Дигармма
+[diagram](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/diagram.png)
+
+Запрос вывод все тбалиц через консоль
+Перед этим `use sakila;`
+Команда `SHOW TABLES;`
+[show_tables](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/show_tables.png)
+
+#### Задание 2
+
+Составьте таблицу, используя любой текстовый редактор или Excel, в которой должно быть два столбца: в первом должны быть 
+названия таблиц восстановленной базы, во втором названия первичных ключей этих таблиц. Пример: (скриншот/текст)
+
+### Ответ
+
+Я решил попрбовать написать запрос и пожалел. Лучше бы просто переписал, но вроде как получилось.
+```bash
+SELECT 
+    kcu.TABLE_NAME AS table_name,
+    kcu.COLUMN_NAME AS primary_key_column
+FROM 
+    INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc
+JOIN 
+    INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS kcu
+    ON tc.CONSTRAINT_NAME = kcu.CONSTRAINT_NAME
+    AND tc.TABLE_SCHEMA = kcu.TABLE_SCHEMA
+    AND tc.TABLE_NAME = kcu.TABLE_NAME
+WHERE 
+    tc.CONSTRAINT_TYPE = 'PRIMARY KEY'
+    AND tc.TABLE_SCHEMA = 'sakila'
+    AND tc.TABLE_NAME IN ('actor', 'address', 'category', 'city', 'country', 'customer', 'film', 'film_actor', 'film_category', 'film_text', 'inventory', 'language', 'payment', 'rental', 'staff', 'store')
+ORDER BY 
+    kcu.TABLE_NAME, kcu.ORDINAL_POSITION;                 
+```
+Скрин выполнения команды
+[key](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/key.png)
+
+#### Задание 3
+
+3.1. Уберите у пользователя sys_temp права на внесение, изменение и удаление данных из базы sakila.
+
+3.2. Выполните запрос на получение списка прав для пользователя sys_temp. (скриншот)
+
+Результатом работы должны быть скриншоты обозначенных заданий, а также простыня со всеми запросами.
+
+### Ответ
+
+3.1
+Что бы убрать все права во всех БД нужно использоват команду.
+```bash
+REVOKE ALL PRIVILEGES ON *. * FROM 'sys_temp'@'localhost';;                 
+```
+
+3.2 Делаем запрос и проверяем права командой
+```bash
+SHOW GRANTS FOR 'sys_temp'@'localhost';                 
+```
+Команда вывести все права.
+
+[grants](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/grants.png)
