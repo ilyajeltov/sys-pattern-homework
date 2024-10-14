@@ -1311,14 +1311,38 @@ $ rabbitmqadmin get queue='hello'
 
 1.1. Устанавдивает MySql 8+ версии
  
- Обновляем нашу систему `sudo apt update && sudo apt upgrade -y` 
- Далее `wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb` можно и последнию версию но я остановился на этой.
- Добавляем репозитории `sudo dpkg -i mysql-apt-config_0.8.22-1_all.deb`
- Далее добавляем GPG ключи `wget -qO - https://repo.mysql.com/RPM-GPG-KEY-mysql-2023 | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mysql.gpg` 
+ Обновляем нашу систему 
+```bash
+ sudo apt update && sudo apt upgrade -y                
+```
+ Далее 
+ ````bash
+ wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
+ ````
+можно и последнию версию но я остановился на этой.
+
+ Добавляем репозитории 
+ ````bash 
+ sudo dpkg -i mysql-apt-config_0.8.22-1_all.deb
+ ````
+ Далее добавляем GPG ключи 
+ ````bash 
+ wget -qO - https://repo.mysql.com/RPM-GPG-KEY-mysql-2023 | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mysql.gpg`
+ ````
  Примечание: Для разной версии используются разные ключи просьба проверять.
- Потом мы делаем `sudo apt update`
- Установка `sudo apt install mysql-server`
- Добавляем в автозагрузку `sudo systemctl enable mysql`
+
+ Потом мы делаем 
+ ````bash
+ sudo apt update
+ ````
+ Установка 
+ ````bash
+ sudo apt install mysql-server
+ ````
+ Добавляем в автозагрузку 
+ ````bash
+ sudo systemctl enable mysql
+ ````
  Установка завершена.
 
 1.2
@@ -1344,23 +1368,41 @@ $ rabbitmqadmin get queue='hello'
 SHOW GRANTS FOR 'sys_temp'@'localhost';                 
 ```
 1.6
- Перезаходим используя команду `mysql -u sys_temp -p`
+ Перезаходим используя команду 
+ ````bash
+ mysql -u sys_temp -p
+ ````
 
 1.7
  Скачал.
 
 1.8
- Создаеи базу `sakila` с помощью команды `CREATE DATABASE sakila;`
- Далее нам нужно восстановить структуру БД `mysql -u sys_temp -p sakila < /path/to/your/sakila-schema.sql`
- После это восстановление данных из файла `mysql -u root -p sakila < /path/to/your/sakila-data.sql`
+ Создаеи базу `sakila` с помощью команды 
+ ````bash
+ CREATE DATABASE sakila;
+ ````
+ Далее нам нужно восстановить структуру БД 
+ ````bash
+ mysql -u sys_temp -p sakila < /path/to/your/sakila-schema.sql
+ ````
+ После это восстановление данных из файла 
+ ````bash
+ mysql -u root -p sakila < /path/to/your/sakila-data.sql
+ ````
 
 1.9
 Дигармма
 [diagram](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/diagram.png)
 
 Запрос вывод все тбалиц через консоль
-Перед этим `use sakila;`
-Команда `SHOW TABLES;`
+Перед этим 
+````bash
+use sakila;
+````
+Команда 
+````bash
+SHOW TABLES;
+````
 [show_tables](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/show_tables.png)
 
 #### Задание 2
