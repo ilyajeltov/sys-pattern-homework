@@ -1489,7 +1489,7 @@ FROM
 WHERE 
     TABLE_SCHEMA = 'sakila';
 ```
-[index_proc](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/grants.png)
+[index_proc](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/index_proc.png)
 
 #### Задание 2
 
@@ -1517,4 +1517,4 @@ from payment p, rental r, customer c
 where p.payment_date >= '2005-07-30 00:00:00' AND p.payment_date < '2005-07-30 23:59:59'  and p.payment_date = r.rental_date and r.customer_id = c.customer_id
 ```
 
-[optimization_zapros](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/grants.png)
+[optimization_zapros](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/optimization_zapros.png)
