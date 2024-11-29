@@ -1738,25 +1738,25 @@ nmap -sS -sV -O -p- 192.168.193.2
 *Режим SYN -sS*
 При использовании данного режима Nmap посылает SYN пакет и для хоста это выглядит как будто с ним хотят установить реальное соединение. Если приходит ответ SYN/ACK – значит порт открыт, а если RST – значит закрыт, если ответ не приходит или пришло ICMP-сообщение об ошибке – значит порт фильтруется.
 
-![nmapSYN](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/nmapSYN)
+[nmapSYN](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/nmapSYN.png)
 
 *Режим FIN -sF*
 
 Вместо SYN-пакета, Nmap начинает FIN-исследование, используя FIN-пакет. Поскольку ранее соединение с исследуемым узлом не было установлено, исследуемый узел отвечает RST-пакетом для сброса соединения. Поступая таким образом, исследуемый узел сообщает о своем существовании. 
 
-![nmapFIN](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/nmapFIN)
+[nmapFIN](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/nmapFIN.png)
 
 *Режим Xmas -sX*
 
 В этом случае TCP-пакеты отсылаются с установленными флагами PSH, URG и FIN. Этот тип также ожидает пакеты RST для closed портов.  Отправленный пакет не содержит биты SYN, RST или ACK и и в ответ будет отправка RST в случае, если порт закрыт, или не повлечет никакого ответа, если порт открыт. При Xmas устанавливаются FIN, PSH и URG флаги. Если в ответ приходит RST пакет, то порт считается закрытым, отсутствие ответа означает, что порт открыт|фильтруется.
 
-![nmapXmas](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/nmapXmas)
+[nmapXmas](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/nmapXmas.png)
 
 *Режим UDP -sU*
 
 Данный вид позволяет сканировать порты используемые UDP службами и работает путём отправки пустого UDP заголовка на соответствующие порты. Если приходит ошибка “порт недостижим”, то в зависимости от типа ошибки Nmap определяет – порт закрыт или фильтруется, если в ответ пришел UDP – пакет значит порт открыт, а если ответа нет – будет присвоен статус open|filtered. Работает UDP сканирование крайне медленно и для ускорения процесса рекомендуется задать список интересующих портов (например -p U:53).
 
-![nmapUDP](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/nmapUDP)
+[nmapUDP](https://github.com/ilyajeltov/sys-pattern-homework/tree/main/img/nmapUDP.png)
 
 </details>
 
